@@ -1,7 +1,7 @@
 __pycache__/
 *.py[cod]
 *.pyo
-
+.idea/
 pretrained_models/
 audio_samples/otabek_samples/otabek_reference_embedding.pt
 audio_samples/otabek_samples/
