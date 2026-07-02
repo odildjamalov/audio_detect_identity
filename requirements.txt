@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+speechbrain
+torch
+torchaudio
+python-multipart
+soundfile
+torchcodec

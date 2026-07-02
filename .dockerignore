@@ -1,0 +1,8 @@
+pretrained_models/
+audios/
+reference_embeddings/
+__pycache__/
+*.pyc
+.git/
+.env
+*.pt
