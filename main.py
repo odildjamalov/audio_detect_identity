@@ -7,7 +7,8 @@ from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
 
 import speaker
 from config.settings import settings
-
+import logging
+log = logging.getLogger(__name__)
 embeddings_cache: dict[str, torch.Tensor] = {}
 
 
@@ -84,11 +85,13 @@ async def enroll(
 async def verify(
     name: str = Form(...),
     file: UploadFile = File(...),
-    threshold: float = Query(default=settings.threshold, ge=0.0, le=1.0),
+    threshold: float = Form(...),
 ):
     """
     Yuklangan audio berilgan speaker (name) ga tegishli yoki yo'qligini tekshiradi.
     """
+
+    print(f"Verifying speaker: {name}, Threshold: {threshold}")
     if name not in embeddings_cache:
         raise HTTPException(
             status_code=404,
@@ -102,6 +105,8 @@ async def verify(
 
     try:
         result = speaker.verify_speaker(tmp_path, embeddings_cache[name], threshold)
+        log.info(f"Verification result for '{name}': {result} threshold: {threshold}")
+        print(f"Verification result for '{name}': {result} threshold: {threshold}")
     finally:
         os.unlink(tmp_path)
 

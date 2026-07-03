@@ -13,7 +13,6 @@ class Settings(BaseSettings):
     model_source: str
     model_savedir: str
 
-    threshold: float = 0.65
 
     class Config:
         env_file = ".env"
