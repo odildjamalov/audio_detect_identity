@@ -85,13 +85,12 @@ async def enroll(
 async def verify(
     name: str = Form(...),
     file: UploadFile = File(...),
-    threshold: float = Form(...),
+    threshold: float = Form(0.65),
 ):
     """
     Yuklangan audio berilgan speaker (name) ga tegishli yoki yo'qligini tekshiradi.
     """
 
-    print(f"Verifying speaker: {name}, Threshold: {threshold}")
     if name not in embeddings_cache:
         raise HTTPException(
             status_code=404,
